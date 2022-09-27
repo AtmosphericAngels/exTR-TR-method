@@ -3,6 +3,7 @@ Calculate mean age of stratospheric air from trace gas concentrations, consideri
 
 Details on the scientific background of the method can be found in the publication "Mean age from observations in the lowermost stratosphere" submitted to ACP in 2022 by Thomas Wagenhaeuser et al.
 
+written in Python 3.7
 
 third-party libraries used:
 
