@@ -154,7 +154,7 @@ def _handle_invalid(func):
         w_finite_t_obs = ~np.isnan(t_obs)
         try:
             if len(t_int) == len(t_obs):
-                # if called from fit_referenceTimeSeries_for_many_t_obs_int_prec,
+                # if called from fit_referenceTimeSeries_for_many_t_obs_int_perc,
                 # then individual t_int values for each t_obs need to get rid of invalid values.
                 t_int = t_int[w_finite_t_obs]
         except TypeError as TE:
@@ -297,7 +297,7 @@ def fit_referenceTimeSeries_for_many_t_obs(t_ref, c_ref, t_obs, t_int=30, polyor
 
 
 # %%
-def fit_referenceTimeSeries_for_many_t_obs_int_prec(
+def fit_referenceTimeSeries_for_many_t_obs_int_perc(
     t_ref,
     c_ref,
     t_obs,
@@ -405,7 +405,7 @@ def fit_referenceTimeSeries_for_many_t_obs_int_prec(
             t_ref, c_ref, t_obs, t_int=fitint, polyorder=polyorder
         )
     except IndexError as IE:
-        print("IndexError in fit_referenceTimeSeries_for_many_t_obs_int_prec:")
+        print("IndexError in fit_referenceTimeSeries_for_many_t_obs_int_perc:")
         print("t_ref.shape:", t_ref.shape)
         print("c_ref.shape:", c_ref.shape)
         print("t_obs.shape:", t_obs.shape)
@@ -471,7 +471,7 @@ def calculate_age_lin_fit_fracts(
     """
     # linear fit, t_ref is shifted so that t_obs = 0
     if int_perc:
-        params, tt, c_ref_crude = fit_referenceTimeSeries_for_many_t_obs_int_prec(
+        params, tt, c_ref_crude = fit_referenceTimeSeries_for_many_t_obs_int_perc(
             t_ref=t_ref,
             c_ref=c_ref,
             t_obs=t_obs,
@@ -622,7 +622,7 @@ def calculate_age_fit_fracts(
     # quadratic fit, t_ref is shifted so that t_obs = 0
     c_ref_cut = handle_deseas(t_ref=t_ref, c_ref=c_ref, deseas=deseas)
     if int_perc:
-        params, tt, c_ref_crude = fit_referenceTimeSeries_for_many_t_obs_int_prec(
+        params, tt, c_ref_crude = fit_referenceTimeSeries_for_many_t_obs_int_perc(
             t_ref=t_ref,
             c_ref=c_ref_cut,
             t_obs=t_obs,
@@ -790,9 +790,9 @@ def calculate_age_fit_smoothy(c_obsx, c_obsy, t_ref, c_ref, t_obs, *args, **kwar
 
 
 @smoothy
-def fit_referenceTimeSeries_for_many_t_obs_int_prec_smoothy(
+def fit_referenceTimeSeries_for_many_t_obs_int_perc_smoothy(
     c_obsx, c_obsy, t_ref, c_ref, t_obs, *args, **kwargs
 ):
-    return fit_referenceTimeSeries_for_many_t_obs_int_prec(
+    return fit_referenceTimeSeries_for_many_t_obs_int_perc(
         t_ref, c_ref, t_obs, c_obsy, *args, **kwargs
     )
